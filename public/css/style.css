@@ -1,0 +1,139 @@
+.hero-psych {
+    background: linear-gradient(180deg, #f0f4ff 0%, #ffffff 100%);
+    padding: 60px 0;
+}
+
+.card-psych {
+    border: 1px solid #eee;
+    border-radius: 16px;
+    transition: all 0.3s ease;
+    background: #fff;
+    overflow: hidden;
+}
+
+.card-psych:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(74, 108, 247, 0.1);
+    border-color: var(--primary-color, #4a6cf7);
+}
+
+.img-wrapper {
+    height: 220px;
+    background: linear-gradient(to bottom, #eef2ff, #ffffff);
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.psych-img {
+    height: 200px;
+    /* Ukuran gambar diseragamkan */
+    width: auto;
+    object-fit: contain;
+    transition: transform 0.3s;
+}
+
+.card-psych:hover .psych-img {
+    transform: scale(1.05);
+}
+
+.badge-spec {
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: 5px 12px;
+    border-radius: 20px;
+    background-color: #e0e7ff;
+    color: #4a6cf7;
+    display: inline-block;
+    margin-bottom: 10px;
+}
+
+.price-tag {
+    font-weight: 700;
+    color: #2c3e50;
+    font-size: 1.1rem;
+}
+
+.search-bar {
+    border-radius: 50px;
+    padding: 12px 25px;
+    border: 1px solid #ddd;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+}
+
+/* =========================================
+   STYLE UNTUK HALAMAN HOME (INDEX.PHP)
+   ========================================= */
+
+.hero {
+    /* Warna Biru Gradasi Khas MentalUX */
+    background: linear-gradient(135deg, #4e73df 0%, #224abe 100%); 
+    color: white;
+    text-align: center;
+    
+    /* PENTING: Jarak Atas biar gak ketabrak Navbar di HP */
+    padding-top: 130px; 
+    padding-bottom: 80px;
+    
+    /* Biar Full Layar di HP */
+    min-height: 100vh; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.free-tag {
+    background-color: rgba(255,255,255,0.2);
+    color: white;
+    padding: 10px 25px;
+    border-radius: 50px;
+    display: inline-block;
+    margin-top: 20px;
+    backdrop-filter: blur(5px);
+    font-weight: 600;
+    border: 1px solid rgba(255,255,255,0.3);
+}
+
+/* KHUSUS LAPTOP (LAYAR BESAR) */
+@media (min-width: 992px) {
+    .hero {
+        /* Jarak lebih lega di laptop */
+        padding-top: 180px; 
+        padding-bottom: 120px;
+        min-height: auto; /* Balikin normal (gak harus full screen) */
+        display: block; /* Balikin display block biar typewriter jalan bener */
+    }
+}
+
+.typewriter {
+    display: inline-block;
+    overflow: hidden;
+    border-right: .15em solid white;
+    white-space: nowrap;
+    margin: 0 auto;
+    letter-spacing: .05em;
+    animation: 
+        typing 8s steps(40, end) infinite,
+        blink-caret .75s step-end infinite;
+}
+
+@keyframes typing {
+    0% {width: 0;}
+    30% {width: 100%;} /* Selesai mengetik di detik ke-2.4 */
+    60% {width: 100%;} /* TAHAN (DIAM) sampai detik ke-4.8 (Biar orang sempat baca) */
+    100% {width: 0;} /* Selesai menghapus pelan-pelan di detik ke-8 */
+}
+
+@media (max-width: 768px) {
+    .typewriter {
+        white-space: normal !important; /* Izinkan teks turun ke baris baru */
+        overflow: visible !important;   /* Tampilkan semua teks */
+        border-right: none !important;  /* Hilangkan kursor kedip */
+        animation: none !important;     /* Matikan animasi gerak */
+        width: 100% !important;         /* Lebar mengikuti layar */
+        height: auto !important;        /* Tinggi otomatis */
+        display: block !important;      /* Biar layout stabil */
+    }
+}
