@@ -65,12 +65,7 @@
                                 </span>
                             </div>
 
-                            <label for="role">Pilih Role:</label>
-                            <select name="role" class="form-select mb-3" required>
-                                <option value="Customer">Customer</option>
-                                <option value="Psychologist">Psychologist</option>
-                                <option value="Admin">Admin</option>
-                            </select>
+
 
                             <div class="form-check mb-3">
                                 <input class="form-check-input" type="checkbox" id="terms" name="terms" required>

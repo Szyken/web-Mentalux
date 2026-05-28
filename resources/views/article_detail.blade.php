@@ -1,52 +1,20 @@
 <?php
-// Ambil ID dari URL (contoh: article_detail.php?id=1)
-$id = $_GET['id'] ?? '1';
+// Konversi object data dari controller ke array
+if (isset($data)) {
+    $articleData = (array) $data;
+} else {
+    // Fallback jika diakses langsung tanpa controller
+    $id = request()->query('id', 1);
+    $dbData = \Illuminate\Support\Facades\DB::table('articles')->where('id', $id)->first() 
+              ?? \Illuminate\Support\Facades\DB::table('articles')->first();
+    $articleData = (array) $dbData;
+}
 
-// DATA DUMMY
-$articles = [
-    '1' => [
-        'title' => 'Mengatasi Burnout Kerja',
-        'category' => 'Work Life',
-        'image' => 'https://images.unsplash.com/photo-1758598497429-6eb3895d5bfa?q=80&w=600&auto=format&fit=crop',
-        'content' => '
-            <p>Merasa lelah terus menerus? Itu bukan sekadar capek biasa. Burnout adalah kondisi kelelahan emosional, fisik, dan mental yang disebabkan oleh stres berlebihan dan berkepanjangan.</p>
-            <h3>Tanda-tanda Burnout:</h3>
-            <ul>
-                <li>Kehilangan motivasi kerja.</li>
-                <li>Merasa tidak berdaya atau terjebak.</li>
-                <li>Menarik diri dari tanggung jawab.</li>
-            </ul>
-            <p>Cara mengatasinya adalah dengan menetapkan batasan (boundaries) yang jelas antara pekerjaan dan kehidupan pribadi. Mulailah dengan tidak mengecek email di luar jam kerja.</p>
-        '
-    ],
-    '2' => [
-        'title' => 'Teknik Pernapasan 4-7-8',
-        'category' => 'Mindfulness',
-        'image' => 'https://images.unsplash.com/photo-1506126613408-eca07ce68773?q=80&w=1200&auto=format&fit=crop',
-        'content' => '
-            <p>Saat panik menyerang, napas kita cenderung pendek dan cepat. Teknik 4-7-8 adalah cara "reset" sistem saraf Anda.</p>
-            <h3>Caranya:</h3>
-            <ol>
-                <li>Tarik napas melalui hidung selama <strong>4 detik</strong>.</li>
-                <li>Tahan napas selama <strong>7 detik</strong>.</li>
-                <li>Hembuskan perlahan melalui mulut selama <strong>8 detik</strong> (seperti meniup lilin).</li>
-            </ol>
-            <p>Ulangi siklus ini sebanyak 4 kali. Ini akan memaksa detak jantung Anda melambat dan pikiran menjadi lebih tenang.</p>
-        '
-    ],
-    '3' => [
-        'title' => 'Menjadi Pendengar Baik',
-        'category' => 'Relationship',
-        'image' => 'https://images.unsplash.com/photo-1529333166437-7750a6dd5a70?q=80&w=1200&auto=format&fit=crop',
-        'content' => '
-            <p>Seringkali teman kita curhat bukan butuh solusi, tapi butuh didengar. Menjadi pendengar aktif (Active Listening) adalah kunci hubungan yang sehat.</p>
-            <p>Hindari memotong pembicaraan atau langsung menghakimi. Cukup hadir, tatap matanya, dan validasi perasaannya dengan kalimat seperti "Aku paham itu pasti berat buat kamu".</p>
-        '
-    ]
-];
+// Map key image_url ke image agar template tetap bekerja tanpa ubah key
+$articleData['image'] = $articleData['image_url'] ?? '';
 
-// Cek apakah artikel ada?
-$data = $articles[$id] ?? $articles['1'];
+// Reassign ke variable $data untuk kecocokan kode di bawahnya
+$data = $articleData;
 ?>
 
 <!DOCTYPE html>

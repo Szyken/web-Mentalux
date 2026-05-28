@@ -50,18 +50,39 @@
 
     <section class="py-5">
         <div class="container">
+            @if(session('success'))
+                <div class="alert alert-success border-0 shadow-sm rounded-4 mb-4 d-flex align-items-center">
+                    <i class="fas fa-check-circle me-2 fa-lg text-success"></i>
+                    <div>{{ session('success') }}</div>
+                </div>
+            @endif
+            @if ($errors->any())
+                <div class="alert alert-danger border-0 shadow-sm rounded-4 mb-4">
+                    <ul class="mb-0">
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+
             <div class="row g-4">
                 
                 <div class="col-md-4">
                     <div class="card stat-card h-100 p-3">
-                        <div class="card-body d-flex align-items-center">
-                            <div class="icon-circle bg-primary bg-opacity-10 text-primary me-3">
-                                <i class="fas fa-user"></i>
+                        <div class="card-body d-flex align-items-center justify-content-between">
+                            <div class="d-flex align-items-center">
+                                <div class="icon-circle bg-primary bg-opacity-10 text-primary me-3">
+                                    <i class="fas fa-user"></i>
+                                </div>
+                                <div>
+                                    <h6 class="text-muted mb-1">My Profile ({{ Auth::user()->username }})</h6>
+                                    <h5 class="fw-bold mb-0" style="font-size: 0.95rem;">{{ Auth::user()->email }}</h5>
+                                </div>
                             </div>
-                            <div>
-                                <h6 class="text-muted mb-1">My Profile</h6>
-                                <h5 class="fw-bold mb-0">{{ Auth::user()->email }}</h5>
-                            </div>
+                            <button class="btn btn-sm btn-outline-primary rounded-circle" data-bs-toggle="modal" data-bs-target="#editProfileModal" title="Ubah Profil">
+                                <i class="fas fa-pencil-alt"></i>
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -73,8 +94,12 @@
                                 <i class="fas fa-calendar-check"></i>
                             </div>
                             <div>
-                                <h6 class="text-muted mb-1">Upcoming Session</h6>
-                                <h5 class="fw-bold mb-0">No Active Session</h5>
+                                <h6 class="text-muted mb-1">Active Session</h6>
+                                <h5 class="fw-bold mb-0">
+                                    {{ isset($activeConsultations) && $activeConsultations->count() > 0 
+                                        ? $activeConsultations->count() . ' Session(s)' 
+                                        : 'No Active Session' }}
+                                </h5>
                             </div>
                         </div>
                     </div>
@@ -96,6 +121,38 @@
 
             </div>
 
+            {{-- Active Consultations Section --}}
+            @if(isset($activeConsultations) && $activeConsultations->count() > 0)
+            <div class="mt-5">
+                <h4 class="fw-bold mb-3"><i class="fas fa-comments text-primary me-2"></i>Active Consultations</h4>
+                <div class="row g-3">
+                    @foreach($activeConsultations as $consult)
+                    <div class="col-md-6">
+                        <div class="card stat-card p-3">
+                            <div class="card-body d-flex align-items-center justify-content-between">
+                                <div class="d-flex align-items-center">
+                                    <img src="https://ui-avatars.com/api/?name={{ urlencode($consult->psychologist_name) }}&background=random" 
+                                         class="rounded-circle me-3" width="50" height="50" alt="Doctor">
+                                    <div>
+                                        <h6 class="fw-bold mb-0">{{ $consult->psychologist_name }}</h6>
+                                        <small class="text-muted">
+                                            <i class="fas fa-circle text-success me-1" style="font-size: 8px;"></i>
+                                            Active • {{ \Carbon\Carbon::parse($consult->created_at)->diffForHumans() }}
+                                        </small>
+                                    </div>
+                                </div>
+                                <a href="{{ route('chat.room', $consult->id) }}" 
+                                   class="btn btn-primary rounded-pill btn-sm px-3">
+                                    <i class="fas fa-comment-dots me-1"></i> Continue Chat
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    @endforeach
+                </div>
+            </div>
+            @endif
+
             <div class="text-center mt-5">
                 <a href="{{ route('logout') }}" class="btn btn-outline-danger px-4">
                     <i class="fas fa-sign-out-alt me-2"></i> Log Out
@@ -104,6 +161,41 @@
 
         </div>
     </section>
+
+    <!-- Modal Edit Profil Customer -->
+    <div class="modal fade" id="editProfileModal" tabindex="-1" aria-labelledby="editProfileModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content border-0 rounded-4 shadow">
+                <div class="modal-header border-0 pb-0">
+                    <h5 class="modal-title fw-bold" id="editProfileModalLabel"><i class="fas fa-user-edit text-primary me-2"></i>Ubah Profil Saya</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form action="{{ route('customer.profile.update') }}" method="POST">
+                    @csrf
+                    @method('PUT')
+                    <div class="modal-body py-4">
+                        <div class="mb-3">
+                            <label class="form-label fw-semibold">Username</label>
+                            <input type="text" class="form-control rounded-3" name="username" value="{{ Auth::user()->username }}" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label fw-semibold">Email</label>
+                            <input type="email" class="form-control rounded-3" name="email" value="{{ Auth::user()->email }}" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label fw-semibold">Password Baru (Opsional)</label>
+                            <input type="password" class="form-control rounded-3" name="password" placeholder="Kosongkan jika tidak ingin diubah" minlength="6">
+                            <small class="text-muted">Isi hanya jika Anda ingin mengganti password login.</small>
+                        </div>
+                    </div>
+                    <div class="modal-footer border-0 pt-0">
+                        <button type="button" class="btn btn-light rounded-pill px-4" data-bs-dismiss="modal">Batal</button>
+                        <button type="submit" class="btn btn-primary rounded-pill px-4">Simpan Perubahan</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 
     @include('footer')
 

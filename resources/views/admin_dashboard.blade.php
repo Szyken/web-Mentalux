@@ -72,23 +72,36 @@
 
         <h4 class="fw-bold mb-3">Management Tools</h4>
         <div class="row g-3">
-            <div class="col-md-6">
+            <div class="col-md-4">
                 <div class="card h-100 border-0 shadow-sm">
                     <div class="card-body">
                         <h5 class="card-title fw-bold"><i class="fas fa-user-check me-2 text-primary"></i> Verify Psychologists</h5>
                         <p class="card-text text-muted small">Check new applications and approve licenses.</p>
                         <a href="{{ route('admin.verifications') }}">
-                        <button class="btn btn-outline-primary btn-sm">Manage Applications</button>
+                            <button class="btn btn-outline-primary btn-sm">Manage Applications</button>
                         </a>
                     </div>
                 </div>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-4">
+                <div class="card h-100 border-0 shadow-sm">
+                    <div class="card-body">
+                        <h5 class="card-title fw-bold"><i class="fas fa-users-cog me-2 text-info"></i> Manage Accounts</h5>
+                        <p class="card-text text-muted small">Manage psychologist, customer, and admin accounts with filters.</p>
+                        <a href="{{ route('admin.accounts') }}">
+                            <button class="btn btn-outline-info btn-sm">Manage Accounts</button>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
                 <div class="card h-100 border-0 shadow-sm">
                     <div class="card-body">
                         <h5 class="card-title fw-bold"><i class="fas fa-file-alt me-2 text-success"></i> Content & Articles</h5>
                         <p class="card-text text-muted small">Add new education articles or manage videos.</p>
-                        <button class="btn btn-outline-success btn-sm">Manage Content</button>
+                        <a href="{{ route('admin.articles') }}">
+                            <button class="btn btn-outline-success btn-sm">Manage Articles</button>
+                        </a>
                     </div>
                 </div>
             </div>

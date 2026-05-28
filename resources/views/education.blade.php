@@ -65,47 +65,32 @@
             </div>
 
             <div class="row g-4">
+                @forelse($articles as $art)
                 <div class="col-md-4">
                     <div class="card card-hover h-100 border-0 shadow-sm">
-                        <img src="https://images.unsplash.com/photo-1758598497429-6eb3895d5bfa?q=80&w=600&auto=format&fit=crop" class="card-img-top" alt="Stress" style="height: 200px; object-fit: cover;">
+                        <img src="{{ $art->image_url }}" class="card-img-top" alt="Article image" style="height: 200px; object-fit: cover;">
                         <div class="card-body">
-                            <span class="badge bg-warning text-dark mb-2">Work Life</span>
-                            <h5 class="card-title fw-bold">Mengatasi Burnout Kerja</h5>
-                            <p class="card-text text-muted small">Merasa lelah terus menerus? Kenali tanda-tanda burnout sebelum terlambat.</p>
+                            @php
+                                $catLower = strtolower($art->category);
+                                $badgeClass = 'bg-secondary';
+                                if (str_contains($catLower, 'work')) $badgeClass = 'bg-warning text-dark';
+                                elseif (str_contains($catLower, 'mindful')) $badgeClass = 'bg-success text-white';
+                                elseif (str_contains($catLower, 'relation')) $badgeClass = 'bg-info text-white';
+                            @endphp
+                            <span class="badge {{ $badgeClass }} mb-2">{{ $art->category }}</span>
+                            <h5 class="card-title fw-bold text-dark">{{ $art->title }}</h5>
+                            <p class="card-text text-muted small">{{ $art->summary }}</p>
                         </div>
                         <div class="card-footer bg-white border-0 pt-0">
-                            <a href="{{ route('article.detail', ['id' => 1]) }}" class="text-primary text-decoration-none small fw-bold">Read More</a>
+                            <a href="{{ route('article.detail', ['id' => $art->id]) }}" class="text-primary text-decoration-none small fw-bold">Read More</a>
                         </div>
                     </div>
                 </div>
-
-                <div class="col-md-4">
-                    <div class="card card-hover h-100 border-0 shadow-sm">
-                        <img src="https://images.unsplash.com/photo-1506126613408-eca07ce68773?q=80&w=600&auto=format&fit=crop" class="card-img-top" alt="Meditation" style="height: 200px; object-fit: cover;">
-                        <div class="card-body">
-                            <span class="badge bg-success mb-2">Mindfulness</span>
-                            <h5 class="card-title fw-bold">Teknik Pernapasan 4-7-8</h5>
-                            <p class="card-text text-muted small">Cara cepat menenangkan diri saat panik menyerang dalam hitungan menit.</p>
-                        </div>
-                        <div class="card-footer bg-white border-0 pt-0">
-                            <a href="{{ route('article.detail', ['id' => 2]) }}" class="text-primary text-decoration-none small fw-bold">Read More</a>
-                        </div>
-                    </div>
+                @empty
+                <div class="col-12 text-center py-5">
+                    <span class="text-muted">Belum ada artikel edukasi diterbitkan.</span>
                 </div>
-
-                <div class="col-md-4">
-                    <div class="card card-hover h-100 border-0 shadow-sm">
-                        <img src="https://images.unsplash.com/photo-1529333166437-7750a6dd5a70?q=80&w=600&auto=format&fit=crop" class="card-img-top" alt="Community" style="height: 200px; object-fit: cover;">
-                        <div class="card-body">
-                            <span class="badge bg-info text-white mb-2">Relationship</span>
-                            <h5 class="card-title fw-bold">Menjadi Pendengar Baik</h5>
-                            <p class="card-text text-muted small">Bagaimana cara mendukung teman yang sedang mengalami masa sulit.</p>
-                        </div>
-                        <div class="card-footer bg-white border-0 pt-0">
-                            <a href="{{ route('article.detail', ['id' => 3]) }}" class="text-primary text-decoration-none small fw-bold">Read More</a>
-                        </div>
-                    </div>
-                </div>
+                @endforelse
             </div>
         </div>
     </section>
