@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 13, 2026 at 07:00 AM
+-- Generation Time: May 28, 2026 at 08:05 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -40,27 +40,46 @@ CREATE TABLE `account` (
 --
 
 INSERT INTO `account` (`id`, `username`, `email`, `password`, `role`) VALUES
-(3, '0', 'ferdy@gmail.com', '$2y$12$u2J', 'CUSTOMER'),
-(4, '0', 'juna@gmail.com', '$2y$12$hSzy7SYBc', 'CUSTOMER'),
-(5, '0', 'hanif@gmail.com', '$2y$12$5Qt0xWRvecGydf4JNC1om.mbkRk2oIoXT1gjJfXtGAerm3r4Ickcq', 'CUSTOMER'),
-(6, '', 'carla@gmail.com', '$2y$12$jHDd2rFYs2njvu/7RQ3B4.sJNJAjtNiHorOnxnVBejwC/MVfmAz1i', 'CUSTOMER'),
 (7, 'udin', 'udin@gmail.com', '$2y$12$LP.rWzmx.UvmcRdLltZ3.ejCwXd7/ivV433NvoiHu1Upu51Iwaf8O', 'CUSTOMER'),
 (8, 'dicky', 'dicky@gmail.com', '$2y$12$Uxn92MHnFAhX8/2iZUEL5OgXnErRv3qE94VKsidzZ5yYWt1MA8U8a', 'Psychologist'),
 (9, 'Hanif', 'hanifafan@gmail.com', '$2y$12$a6gTclrMhPCaT4zi485fzOniumgN/JNTZs5Eu6p3Q1YzeHUkzU.2G', 'Admin'),
-(10, 'dickyy', 'dickyy@gmail.com', '$2y$10$zQ36/qS1EayrEWjfKzZXh.mSuxgu4MTGEZTy5MNEn600//cyvw4oG', 'Psychologist'),
 (11, 'Ferdy', 'ferdyy@gmail.com', '$2y$12$Tq0dUQyjgBGBTt7tJi.W1.rcLNR7CqmLy3oBBpyJu5GVnmEkKjgre', 'Customer'),
 (12, 'Messi', 'messi@gmail.com', '$2y$12$b.5/aqDrzLeVFf.tzlodLuUvGidHSjSJRnv0PoryRQ8AEF9q4QOFO', 'Customer'),
 (13, 'juna', 'herjuna@gmail.com', '$2y$12$fAypwRbmMsj54jMlJw0b7OxHoKo0.tfK8.9lM1RyXJwK82QiuoGsm', 'Admin'),
 (14, 'Ronaldo', 'ronaldo@gmail.com', '$2y$12$bvoivqPC28a5nuw6Ljqh5e1HdPgGNzRbFNXEyl4irgUAvXb0k1POe', 'Customer'),
-(15, 'Maldini', 'maldini@gmail.com', '$2y$12$/Wdf5yxABrGeL5qq2RtqP.3NIoYB1Ztld0W.DhM6NPq24l42s9xAO', 'Admin'),
-(16, 'Zidane', 'zidane@gmail.com', '$2y$12$5w./UUilGWW2PStEbJ3TD.s7EVDS.okGIwerZ5cJqzyFK1vCzqPVK', 'Psychologist'),
-(17, 'Pep', 'pep@gmail.com', '$2y$12$UWO6XHEBVri4wN65KdqiUO8PY1JCD6i17Yf8gvKRhVcwX6d9Pfgqy', 'Psychologist'),
+(16, 'Zidane', 'zidane@gmail.com', '$2y$12$5w./UUilGWW2PStEbJ3TD.s7EVDS.okGIwerZ5cJqzyFK1vCzqPVK', 'Customer'),
 (18, 'Alex Ferguson', '108c2019@gmail.com', '$2y$12$rockcQ9xFbGjw1464g9gHu/AIh3jtMfb5qZS.3FL9Yd/woV56EBIW', 'Customer'),
 (19, 'Ferdy N', 'ferdyOey@gmail.com', '$2y$12$QsFkVdW2KsoTSg7Z9H4kxOVpF6jDrwICRsuwp37LX/HZm3GoFtPCO', 'Customer'),
 (20, 'Yantok', 'yantok@gmail.com', '$2y$12$BsMsO6D53P69tTyvOfzSI.D/lefGC5VixB1T9NEYxsSbL.zIGL/GS', 'Customer'),
-(21, 'Ferdy', 'ferdy1@gmail.com', '$2y$12$Wf5BcX3E7wSWbmTEXw4yD.yVROycZ4xZSmIcsZfuwP1yvrEzoANHa', 'Psychologist'),
 (22, 'Ferdy Nugraha', 'ferdy.nugraha@student.umn.ac.id', '$2y$12$OZ8q6vR/UlrU1d0boo1u3eGN8w6sP4ZNkAAMSnFI3wkCj8gq5SKgC', 'Customer'),
-(23, 'Rio', 'rio@gmail.com', '$2y$12$nKANZg64Lh7tiq/Kz8QklOKDUb2SI1bm8ls66OVG07aBj7ame9xgi', 'Customer');
+(24, 'Amanda Angela', 'amanda@gmail.com', '$2y$12$LWk7OqfT1FM9YXg0CQBCDufk2qr2EFl0o4i3Ni.mXNxDrKhPodR1m', 'Psychologist'),
+(26, 'Dharma', 'dharma@gmail.com', '$2y$12$Si0.HjenbKqOLJYDBx52DuLFSzlmdBGVrt.xDyEkI.DgSsGDxhthe', 'Psychologist');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `articles`
+--
+
+CREATE TABLE `articles` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `title` varchar(255) NOT NULL,
+  `category` varchar(255) NOT NULL,
+  `image_url` varchar(255) NOT NULL,
+  `summary` text NOT NULL,
+  `content` text NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `articles`
+--
+
+INSERT INTO `articles` (`id`, `title`, `category`, `image_url`, `summary`, `content`, `created_at`, `updated_at`) VALUES
+(1, 'Mengatasi Burnout Kerja', 'Work Life', 'https://images.unsplash.com/photo-1758598497429-6eb3895d5bfa?q=80&w=600&auto=format&fit=crop', 'Merasa lelah terus menerus? Kenali tanda-tanda burnout sebelum terlambat.', '<p>Merasa lelah terus menerus? Itu bukan sekadar capek biasa. Burnout adalah kondisi kelelahan emosional, fisik, dan mental yang disebabkan oleh stres berlebihan dan berkepanjangan.</p><h3>Tanda-tanda Burnout:</h3><ul><li>Kehilangan motivasi kerja.</li><li>Merasa tidak berdaya atau terjebak.</li><li>Menarik diri dari tanggung jawab.</li></ul><p>Cara mengatasinya adalah dengan menetapkan batasan (boundaries) yang jelas antara pekerjaan dan kehidupan pribadi. Mulailah dengan tidak mengecek email di luar jam kerja.</p>', '2026-05-28 10:43:52', '2026-05-28 10:43:52'),
+(2, 'Teknik Pernapasan 4-7-8', 'Mindfulness', 'https://images.unsplash.com/photo-1506126613408-eca07ce68773?q=80&w=1200&auto=format&fit=crop', 'Cara cepat menenangkan diri saat panik menyerang dalam hitungan menit.', '<p>Saat panik menyerang, napas kita cenderung pendek dan cepat. Teknik 4-7-8 adalah cara \"reset\" sistem saraf Anda.</p><h3>Caranya:</h3><ol><li>Tarik napas melalui hidung selama <strong>4 detik</strong>.</li><li>Tahan napas selama <strong>7 detik</strong>.</li><li>Hembuskan perlahan melalui mulut selama <strong>8 detik</strong> (seperti meniup lilin).</li></ol><p>Ulangi siklus ini sebanyak 4 kali. Ini akan memaksa detak jantung Anda melambat dan pikiran menjadi lebih tenang.</p>', '2026-05-28 10:43:52', '2026-05-28 10:43:52'),
+(3, 'Menjadi Pendengar Baik', 'Relationship', 'https://images.unsplash.com/photo-1529333166437-7750a6dd5a70?q=80&w=1200&auto=format&fit=crop', 'Bagaimana cara mendukung teman yang sedang mengalami masa sulit.', '<p>Seringkali teman kita curhat bukan butuh solusi, tapi butuh didengar. Menjadi pendengar aktif (Active Listening) adalah kunci hubungan yang sehat.</p><p>Hindari memotong pembicaraan atau langsung menghakimi. Cukup hadir, tatap matanya, dan validasi perasaannya dengan kalimat seperti \"Aku paham itu pasti berat buat kamu\".</p>', '2026-05-28 10:43:52', '2026-05-28 10:43:52');
 
 -- --------------------------------------------------------
 
@@ -85,6 +104,78 @@ CREATE TABLE `cache_locks` (
   `owner` varchar(255) NOT NULL,
   `expiration` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `chat_messages`
+--
+
+CREATE TABLE `chat_messages` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `consultation_id` bigint(20) UNSIGNED NOT NULL,
+  `sender_id` int(11) NOT NULL,
+  `sender_role` enum('patient','psychologist') NOT NULL,
+  `message` text NOT NULL,
+  `is_read` tinyint(1) NOT NULL DEFAULT 0,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `chat_messages`
+--
+
+INSERT INTO `chat_messages` (`id`, `consultation_id`, `sender_id`, `sender_role`, `message`, `is_read`, `created_at`) VALUES
+(1, 1, 8, 'psychologist', 'Halo, selamat datang! 👋\nSaya Dr. Dicky Oktrianda. Bagaimana perasaan Anda hari ini? Ada yang bisa saya bantu?', 1, '2026-05-28 10:26:33'),
+(2, 1, 12, 'patient', 'halo dok', 1, '2026-05-28 10:26:39'),
+(3, 1, 8, 'psychologist', 'halo apa kabar apakah ada kendala?', 1, '2026-05-28 10:27:17'),
+(4, 2, 8, 'psychologist', 'Halo, selamat datang! 👋\nSaya Dr. Dicky Oktrianda. Bagaimana perasaan Anda hari ini? Ada yang bisa saya bantu?', 1, '2026-05-28 10:28:30'),
+(5, 2, 12, 'patient', 'halo dok saya mau konsul terkait Wc2026', 1, '2026-05-28 10:28:45'),
+(6, 2, 8, 'psychologist', 'terkait apa?', 1, '2026-05-28 10:29:11'),
+(7, 2, 12, 'patient', 'ronaldo kontol', 1, '2026-05-28 10:29:21'),
+(8, 3, 12, 'psychologist', 'Halo, selamat datang! 👋\nSaya Amanda Angela S.Psi, M.Psi. Bagaimana perasaan Anda hari ini? Ada yang bisa saya bantu?', 0, '2026-05-28 10:30:41'),
+(9, 4, 24, 'psychologist', 'Halo, selamat datang! 👋\nSaya Amanda Angela S.Psi, M.Psi. Bagaimana perasaan Anda hari ini? Ada yang bisa saya bantu?', 1, '2026-05-28 10:32:49'),
+(10, 4, 12, 'patient', 'tes', 1, '2026-05-28 10:32:53'),
+(11, 5, 12, 'psychologist', 'Halo, selamat datang! 👋\nSaya Dharma Novriansyah, M.Psi. Bagaimana perasaan Anda hari ini? Ada yang bisa saya bantu?', 0, '2026-05-28 10:57:41'),
+(12, 5, 12, 'patient', 'halo', 0, '2026-05-28 10:57:45'),
+(13, 6, 26, 'psychologist', 'Halo, selamat datang! 👋\nSaya Dharma Novriansyah, M.Psi. Bagaimana perasaan Anda hari ini? Ada yang bisa saya bantu?', 1, '2026-05-28 10:59:33'),
+(14, 6, 12, 'patient', 'e', 1, '2026-05-28 10:59:36'),
+(15, 7, 26, 'psychologist', 'Halo, selamat datang! 👋\nSaya Dharma Novriansyah, M.Psi. Bagaimana perasaan Anda hari ini? Ada yang bisa saya bantu?', 1, '2026-05-28 11:04:05'),
+(16, 7, 12, 'patient', 'halo', 1, '2026-05-28 11:04:08'),
+(17, 7, 12, 'patient', 'loh kenapa dok?', 1, '2026-05-28 11:04:27'),
+(18, 7, 26, 'psychologist', 'taik lu', 1, '2026-05-28 11:04:32'),
+(19, 7, 26, 'psychologist', 'oi', 1, '2026-05-28 11:04:43'),
+(20, 7, 26, 'psychologist', 'end ga lu', 1, '2026-05-28 11:04:46');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `consultations`
+--
+
+CREATE TABLE `consultations` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `patient_id` int(11) NOT NULL,
+  `psychologist_id` int(11) DEFAULT NULL,
+  `psychologist_name` varchar(255) NOT NULL,
+  `status` enum('active','ended') NOT NULL DEFAULT 'active',
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `end_requested_by` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `consultations`
+--
+
+INSERT INTO `consultations` (`id`, `patient_id`, `psychologist_id`, `psychologist_name`, `status`, `created_at`, `updated_at`, `end_requested_by`) VALUES
+(1, 12, 8, 'Dr. Dicky Oktrianda', 'ended', '2026-05-28 10:26:33', '2026-05-28 10:27:44', NULL),
+(2, 12, 8, 'Dr. Dicky Oktrianda', 'ended', '2026-05-28 10:28:30', '2026-05-28 10:29:30', NULL),
+(3, 12, NULL, 'Amanda Angela S.Psi, M.Psi', 'ended', '2026-05-28 10:30:41', '2026-05-28 10:32:38', NULL),
+(4, 12, 24, 'Amanda Angela S.Psi, M.Psi', 'ended', '2026-05-28 10:32:49', '2026-05-28 10:39:02', NULL),
+(5, 12, NULL, 'Dharma Novriansyah, M.Psi', 'ended', '2026-05-28 10:57:41', '2026-05-28 10:59:24', NULL),
+(6, 12, 26, 'Dharma Novriansyah, M.Psi', 'ended', '2026-05-28 10:59:33', '2026-05-28 10:59:42', NULL),
+(7, 12, 26, 'Dharma Novriansyah, M.Psi', 'ended', '2026-05-28 11:04:05', '2026-05-28 11:04:58', NULL);
 
 -- --------------------------------------------------------
 
@@ -158,7 +249,11 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (2, '0001_01_01_000001_create_cache_table', 1),
 (3, '0001_01_01_000002_create_jobs_table', 1),
 (4, '2025_12_13_074758_create_psychologists_table', 1),
-(5, '2025_12_13_083419_add_status_to_psychologist_certificates_table', 2);
+(6, '2025_12_13_083419_add_status_to_psychologist_certificates_table', 2),
+(7, '2026_05_29_000001_create_consultations_table', 2),
+(8, '2026_05_29_000002_create_chat_messages_table', 2),
+(9, '2026_05_29_000003_create_articles_table', 3),
+(10, '2026_05_29_000004_add_end_requested_by_to_consultations_table', 4);
 
 -- --------------------------------------------------------
 
@@ -227,8 +322,7 @@ CREATE TABLE `psychologist_certificates` (
 --
 
 INSERT INTO `psychologist_certificates` (`id`, `psychologist_id`, `certificate_name`, `certificate_path`, `status`, `reject_reason`, `uploaded_at`) VALUES
-(8, 9, '(Dummy) Sertifikat Psikolog.pdf', 'certificate_9_1765616877.pdf', 'approved', NULL, '2025-12-13 02:07:57'),
-(11, 21, 'Antaboga_Ferdy Nugraha Oey.pdf', 'certificate_21_1765861803.pdf', 'approved', NULL, '2025-12-15 22:10:03');
+(8, 9, '(Dummy) Sertifikat Psikolog.pdf', 'certificate_9_1765616877.pdf', 'pending', NULL, '2025-12-13 02:07:57');
 
 -- --------------------------------------------------------
 
@@ -275,6 +369,12 @@ ALTER TABLE `account`
   ADD UNIQUE KEY `email_2` (`email`);
 
 --
+-- Indexes for table `articles`
+--
+ALTER TABLE `articles`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `cache`
 --
 ALTER TABLE `cache`
@@ -285,6 +385,23 @@ ALTER TABLE `cache`
 --
 ALTER TABLE `cache_locks`
   ADD PRIMARY KEY (`key`);
+
+--
+-- Indexes for table `chat_messages`
+--
+ALTER TABLE `chat_messages`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `chat_messages_consultation_id_created_at_index` (`consultation_id`,`created_at`),
+  ADD KEY `chat_messages_consultation_id_is_read_index` (`consultation_id`,`is_read`);
+
+--
+-- Indexes for table `consultations`
+--
+ALTER TABLE `consultations`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `consultations_patient_id_index` (`patient_id`),
+  ADD KEY `consultations_psychologist_id_index` (`psychologist_id`),
+  ADD KEY `consultations_status_index` (`status`);
 
 --
 -- Indexes for table `failed_jobs`
@@ -354,7 +471,25 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `account`
 --
 ALTER TABLE `account`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+
+--
+-- AUTO_INCREMENT for table `articles`
+--
+ALTER TABLE `articles`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT for table `chat_messages`
+--
+ALTER TABLE `chat_messages`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+
+--
+-- AUTO_INCREMENT for table `consultations`
+--
+ALTER TABLE `consultations`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `failed_jobs`
@@ -372,7 +507,7 @@ ALTER TABLE `jobs`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `psychologists`
