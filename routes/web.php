@@ -79,6 +79,7 @@ Route::middleware(['auth'])->group(function () {
 
     // Dashboard Psikolog (Pake DashboardController)
     Route::get('/dashboard/psychologist', [DashboardController::class, 'psychologist'])->name('dashboard.psychologist');
+    Route::delete('/dashboard/psychologist/consultation/{id}', [DashboardController::class, 'deleteConsultation'])->name('psychologist.consultation.delete');
 
     // --- FITUR PSIKOLOG (UPLOAD SERTIFIKAT) ---
     // (Digabung disini biar aman harus login dulu)
@@ -115,6 +116,8 @@ Route::middleware(['auth'])->group(function () {
     // Action Tombol
     Route::post('/dashboard/admin/verifications/{id}/approve', [AdminController::class, 'approve'])->name('admin.approve');
     Route::post('/dashboard/admin/verifications/{id}/reject', [AdminController::class, 'reject'])->name('admin.reject');
+    Route::post('/dashboard/admin/verifications/{id}/revoke', [AdminController::class, 'revoke'])->name('admin.revoke');
+    Route::delete('/dashboard/admin/verifications/{id}', [AdminController::class, 'deleteVerification'])->name('admin.delete.verification');
 
     // Kelola Akun Admin
     Route::get('/dashboard/admin/accounts', [AdminController::class, 'accounts'])->name('admin.accounts');

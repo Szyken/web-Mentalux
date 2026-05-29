@@ -73,7 +73,7 @@
                             <i class="fas fa-edit me-2"></i> Ganti File
                         </button>
 
-                        <form action="{{ route('psychologist.upload.delete') }}" method="POST" onsubmit="return confirm('Yakin hapus sertifikat? Verifikasi akan hilang.');">
+                        <form action="{{ route('psychologist.upload.delete') }}" method="POST" class="d-inline delete-cert-form">
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="btn btn-outline-danger">
@@ -140,5 +140,25 @@
     @endif
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        document.querySelector('.delete-cert-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            Swal.fire({
+                title: 'Hapus Sertifikat Praktek?',
+                text: "Apakah Anda yakin ingin menghapus sertifikat praktek Anda? Status verifikasi Anda akan hilang dan profil Anda tidak akan muncul di halaman pencarian pasien.",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#dc3545',
+                cancelButtonColor: '#6c757d',
+                confirmButtonText: 'Ya, Hapus!',
+                cancelButtonText: 'Batal'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    this.submit();
+                }
+            });
+        });
+    </script>
 </body>
 </html>

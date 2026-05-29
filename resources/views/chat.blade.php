@@ -21,7 +21,9 @@
     {{-- Header Chat --}}
     <div class="chat-header">
         <div class="doctor-info">
-            <a href="{{ url('/') }}" class="text-dark me-2"><i class="fas fa-arrow-left"></i></a>
+            <a href="{{ $userRole === 'psychologist' ? route('dashboard.psychologist') : route('dashboard.customer') }}" class="text-dark me-2" title="Kembali ke Dashboard">
+                <i class="fas fa-arrow-left"></i>
+            </a>
 
             <img src="https://ui-avatars.com/api/?name={{ urlencode($partnerName) }}&background=random" class="doctor-avatar" alt="Partner">
 
@@ -80,7 +82,11 @@
     {{-- Floating Agreement Banner --}}
     <div id="endSessionAgreement" class="card border-0 shadow-lg rounded-4 p-3 position-fixed d-none" 
          style="bottom: 90px; left: 20px; right: 20px; z-index: 1050; background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); border-left: 5px solid #dc3545 !important;">
-        <div class="d-flex align-items-center justify-content-between flex-wrap gap-2">
+        <!-- Minimize Icon Button -->
+        <button type="button" class="btn btn-link text-secondary p-0 position-absolute" style="top: 10px; right: 15px; z-index: 10; text-decoration: none;" onclick="minimizeEndAgreement()" title="Sembunyikan">
+            <i class="fas fa-minus"></i>
+        </button>
+        <div class="d-flex align-items-center justify-content-between flex-wrap gap-2 pe-3">
             <div class="d-flex align-items-center">
                 <div class="bg-danger bg-opacity-10 p-2 rounded-circle me-3 text-danger">
                     <i class="fas fa-exclamation-triangle fa-lg"></i>
@@ -96,6 +102,32 @@
             </div>
         </div>
     </div>
+
+    {{-- Minimized Agreement Badge --}}
+    <div id="endSessionMini" class="position-fixed d-none shadow-lg rounded-circle d-flex align-items-center justify-content-center bg-danger text-white pulse-warning-btn" 
+         style="bottom: 90px; right: 20px; width: 50px; height: 50px; z-index: 1050; cursor: pointer; transition: all 0.3s ease;"
+         onclick="maximizeEndAgreement()" title="Tampilkan Permintaan Akhiri Sesi">
+        <i class="fas fa-exclamation-triangle"></i>
+        <span class="position-absolute top-0 start-100 translate-middle p-1 bg-warning border border-light rounded-circle"></span>
+    </div>
+
+    <style>
+        .pulse-warning-btn {
+            animation: pulse-danger-btn 2s infinite;
+        }
+        @keyframes pulse-danger-btn {
+            0% { box-shadow: 0 0 0 0 rgba(220, 53, 69, 0.4); }
+            70% { box-shadow: 0 0 0 12px rgba(220, 53, 69, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(220, 53, 69, 0); }
+        }
+        #endSessionMini {
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        #endSessionMini:hover {
+            transform: scale(1.1);
+        }
+    </style>
 
     {{-- Input Pesan --}}
     <div class="chat-input-area">
@@ -133,6 +165,7 @@
         // Track ID pesan terakhir untuk polling
         let lastMessageId = {{ $messages->count() > 0 ? $messages->last()->id : 0 }};
         let isPolling = true;
+        let isEndAgreementMinimized = false;
 
         // Scroll ke bawah saat pertama load
         scrollToBottom();
@@ -220,6 +253,7 @@
 
                     // Check for end session request
                     const agreementDiv = document.getElementById('endSessionAgreement');
+                    const miniDiv = document.getElementById('endSessionMini');
                     const requestBy = data.end_requested_by;
 
                     if (requestBy) {
@@ -229,7 +263,6 @@
                             document.getElementById('agreementActions').innerHTML = `
                                 <button onclick="cancelEndRequest()" class="btn btn-outline-secondary btn-sm rounded-pill px-3">Batal Kirim</button>
                             `;
-                            agreementDiv.classList.remove('d-none');
                         } else {
                             const partner = '{{ $partnerName }}';
                             document.getElementById('agreementTitle').textContent = 'Partner Meminta Akhiri Sesi';
@@ -238,10 +271,20 @@
                                 <button onclick="acceptEndSession()" class="btn btn-danger btn-sm rounded-pill px-3 fw-bold">Setuju & Akhiri</button>
                                 <button onclick="rejectEndSession()" class="btn btn-light btn-sm rounded-pill px-3 border">Tolak</button>
                             `;
+                        }
+
+                        // Tampilkan berdasarkan state minimize
+                        if (isEndAgreementMinimized) {
+                            agreementDiv.classList.add('d-none');
+                            miniDiv.classList.remove('d-none');
+                        } else {
                             agreementDiv.classList.remove('d-none');
+                            miniDiv.classList.add('d-none');
                         }
                     } else {
                         agreementDiv.classList.add('d-none');
+                        miniDiv.classList.add('d-none');
+                        isEndAgreementMinimized = false; // Reset state jika request selesai
                     }
 
                     // Render messages if any
@@ -344,6 +387,8 @@
             .then(data => {
                 if (data.success) {
                     document.getElementById('endSessionAgreement').classList.add('d-none');
+                    document.getElementById('endSessionMini').classList.add('d-none');
+                    isEndAgreementMinimized = false;
                     showToast('❌ Permintaan akhiri sesi ditolak.');
                 }
             });
@@ -351,6 +396,18 @@
 
         function cancelEndRequest() {
             rejectEndSession();
+        }
+
+        function minimizeEndAgreement() {
+            isEndAgreementMinimized = true;
+            document.getElementById('endSessionAgreement').classList.add('d-none');
+            document.getElementById('endSessionMini').classList.remove('d-none');
+        }
+
+        function maximizeEndAgreement() {
+            isEndAgreementMinimized = false;
+            document.getElementById('endSessionMini').classList.add('d-none');
+            document.getElementById('endSessionAgreement').classList.remove('d-none');
         }
         // ==========================================
         // RENDER CHAT BUBBLE

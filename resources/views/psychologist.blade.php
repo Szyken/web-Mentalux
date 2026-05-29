@@ -88,10 +88,27 @@ if (isset($_GET['cari']) && !empty($_GET['cari'])) {
                                     </div>
                                     
                                     @auth
-                                        <a href="{{ url('/booking/' . $psy['name']) }}"
-                                            class="btn btn-primary rounded-pill px-4 fw-bold btn-sm">
-                                            Book Now
-                                        </a>
+                                        @php
+                                            $isSelf = false;
+                                            if (auth()->user()->role === 'Psychologist' || strtolower(auth()->user()->role) === 'psychologist') {
+                                                $userName = strtolower(auth()->user()->username);
+                                                $psyName = strtolower($psy['name']);
+                                                if (str_contains($psyName, $userName) || str_contains($userName, $psyName)) {
+                                                    $isSelf = true;
+                                                }
+                                            }
+                                        @endphp
+
+                                        @if($isSelf)
+                                            <span class="badge bg-secondary bg-opacity-10 text-secondary rounded-pill px-3 py-2 fw-semibold" style="font-size: 0.75rem;">
+                                                Ini Profil Anda
+                                            </span>
+                                        @else
+                                            <a href="{{ url('/booking/' . $psy['name']) }}"
+                                                class="btn btn-primary rounded-pill px-4 fw-bold btn-sm">
+                                                Book Now
+                                            </a>
+                                        @endif
                                     @else
                                         <button type="button" 
                                             class="btn btn-primary rounded-pill px-4 fw-bold btn-sm"
@@ -148,6 +165,17 @@ if (isset($_GET['cari']) && !empty($_GET['cari'])) {
         </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-</body>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
+    @if(session('error'))
+        <script>
+            Swal.fire({
+                icon: 'error',
+                title: 'Akses Ditolak!',
+                text: "{{ session('error') }}",
+                confirmButtonColor: '#4B4DED'
+            });
+        </script>
+    @endif
+</body>
 </html>

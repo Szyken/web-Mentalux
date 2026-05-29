@@ -22,7 +22,43 @@ class BookingController extends Controller
         // urldecode buat ngilangin %20 dari URL
         $name = urldecode($psikolog_name);
 
-        return view('booking', compact('name', 'timeSlots'));
+        // Ambil data detail psikolog dari database
+        $psikolog = DB::table('psychologists')->where('name', $name)->first();
+
+        if ($psikolog) {
+            // Cari akun psychologist di tabel account
+            $psychologistAccount = DB::table('account')
+                ->whereRaw('LOWER(role) = ?', ['psychologist'])
+                ->where(function($query) use ($name) {
+                    $query->where('username', 'LIKE', '%' . $name . '%')
+                          ->orWhereRaw('LOWER(?) LIKE CONCAT("%", LOWER(username), "%")', [$name]);
+                })
+                ->first();
+
+            if ($psychologistAccount) {
+                // CEK APAKAH USER LOGGED IN ADALAH PSIKOLOG INI SENDIRI!
+                if (Auth::check() && Auth::id() === $psychologistAccount->id) {
+                    return redirect()->route('psychologist.index')
+                        ->with('error', 'Anda tidak dapat melakukan booking atau berkonsultasi dengan diri Anda sendiri!');
+                }
+
+                // Cek apakah ada sertifikat dengan status approved
+                $isApproved = DB::table('psychologist_certificates')
+                    ->where('psychologist_id', $psychologistAccount->id)
+                    ->where('status', 'approved')
+                    ->exists();
+
+                if (!$isApproved) {
+                    return redirect()->route('psychologist.index')
+                        ->with('error', 'Maaf, psikolog ini belum terverifikasi oleh Admin dan belum bisa menerima konsultasi!');
+                }
+            } else {
+                return redirect()->route('psychologist.index')
+                    ->with('error', 'Maaf, akun login untuk psikolog ini belum terdaftar di platform!');
+            }
+        }
+
+        return view('booking', compact('name', 'timeSlots', 'psikolog'));
     }
 
     public function store(Request $request)
@@ -86,6 +122,28 @@ class BookingController extends Controller
             ->first();
 
         $psychologistId = $psychologistAccount->id ?? null;
+
+        if ($psychologistId) {
+            // CEK APAKAH USER LOGGED IN ADALAH PSIKOLOG INI SENDIRI!
+            if ($user->id === $psychologistId) {
+                return redirect()->route('psychologist.index')
+                    ->with('error', 'Anda tidak dapat berkonsultasi dengan diri Anda sendiri!');
+            }
+
+            // Cek apakah ada sertifikat dengan status approved
+            $isApproved = DB::table('psychologist_certificates')
+                ->where('psychologist_id', $psychologistId)
+                ->where('status', 'approved')
+                ->exists();
+
+            if (!$isApproved) {
+                return redirect()->route('psychologist.index')
+                    ->with('error', 'Gagal! Psikolog ini belum terverifikasi oleh Admin.');
+            }
+        } else {
+            return redirect()->route('psychologist.index')
+                ->with('error', 'Gagal! Akun login Psikolog tidak ditemukan atau belum aktif.');
+        }
 
         // Cek apakah sudah ada konsultasi aktif dengan psikolog ini
         $existingConsultation = DB::table('consultations')

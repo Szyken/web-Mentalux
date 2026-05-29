@@ -23,6 +23,16 @@
                 <div class="col-md-6">
                     <div class="card bg-white rounded shadow p-4">
                         <h2 class="text-center text-primary mb-4">Please login to continue</h2>
+
+                        @if($errors->any())
+                            <div class="alert alert-danger border-0 rounded-4 shadow-sm d-flex align-items-center mb-4" style="background-color: #fff5f5; color: #e53e3e; border-left: 4px solid #e53e3e !important; font-size: 0.85rem; padding: 12px 16px;">
+                                <i class="fas fa-exclamation-circle me-2 fs-5"></i>
+                                <div>
+                                    {{ $errors->first() }}
+                                </div>
+                            </div>
+                        @endif
+
                         <form method="POST" action="{{ route('login.process') }}">
                             @csrf
                             <div class="form-floating mb-3">
@@ -92,6 +102,6 @@
             icon.classList.toggle('fa-eye-slash');
         });
     </script>
-</body>
 
+</body>
 </html>

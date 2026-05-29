@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <style>
         body {
@@ -325,12 +326,24 @@
 
             {{-- Consultation List --}}
             <div class="col-lg-8">
-                <h4 class="fw-bold mb-4 section-title">
-                    <i class="fas fa-calendar-alt text-primary me-2"></i>Consultations
-                </h4>
+                <div class="d-flex flex-wrap gap-2 mb-4 align-items-center justify-content-between">
+                    <h4 class="fw-bold mb-0 section-title">
+                        <i class="fas fa-calendar-alt text-primary me-2"></i>Consultations
+                    </h4>
+                    <!-- Quick Filters -->
+                    <div class="btn-group btn-group-sm rounded-pill shadow-sm bg-white p-1" role="group">
+                        <button type="button" class="btn btn-primary rounded-pill px-3 active filter-btn" data-filter="all">Semua</button>
+                        <button type="button" class="btn btn-light rounded-pill px-3 filter-btn" data-filter="today">Hari Ini</button>
+                        <button type="button" class="btn btn-light rounded-pill px-3 filter-btn" data-filter="tomorrow">Besok</button>
+                        <button type="button" class="btn btn-light rounded-pill px-3 filter-btn" data-filter="active">Aktif</button>
+                        <button type="button" class="btn btn-light rounded-pill px-3 filter-btn" data-filter="ended">Selesai</button>
+                    </div>
+                </div>
 
                 @forelse($appointments as $apt)
-                <div class="appointment-card mb-3 {{ $apt['unread'] > 0 ? 'has-unread' : '' }}">
+                <div class="appointment-card mb-3 {{ $apt['unread'] > 0 ? 'has-unread' : '' }} filter-item" 
+                     data-date-type="{{ $apt['date_type'] }}" 
+                     data-status="{{ strtolower($apt['status']) }}">
                     <div class="card-body d-flex align-items-center justify-content-between p-3">
                         <div class="d-flex align-items-center gap-3">
                             {{-- Date Badge --}}
@@ -371,6 +384,13 @@
                                 <a href="{{ route('chat.room', $apt['id']) }}" class="btn-join-chat btn-join-ended">
                                     <i class="fas fa-eye"></i> View
                                 </a>
+                                <form action="{{ route('psychologist.consultation.delete', $apt['id']) }}" method="POST" class="d-inline delete-consultation-form">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-outline-danger rounded-circle p-2 d-flex align-items-center justify-content-center border-0 btn-delete-history" style="width: 38px; height: 38px;" title="Hapus Riwayat">
+                                        <i class="fas fa-trash-alt"></i>
+                                    </button>
+                                </form>
                             @endif
                         </div>
                     </div>
@@ -428,7 +448,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="{{ asset('js/script.js') }}"></script>
 
-    {{-- Auto-refresh unread count --}}
+    {{-- Auto-refresh unread count & Advanced interactivity --}}
     <script>
         function refreshUnreadBadges() {
             fetch('/chat/unread-count', {
@@ -448,7 +468,97 @@
 
         // Refresh setiap 10 detik
         setInterval(refreshUnreadBadges, 10000);
+
+        // Filter functionality
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                // Toggle active button class
+                document.querySelectorAll('.filter-btn').forEach(b => {
+                    b.classList.remove('btn-primary', 'active');
+                    b.classList.add('btn-light');
+                });
+                this.classList.remove('btn-light');
+                this.classList.add('btn-primary', 'active');
+
+                const filterValue = this.getAttribute('data-filter');
+                const items = document.querySelectorAll('.filter-item');
+                let visibleCount = 0;
+
+                items.forEach(item => {
+                    const dateType = item.getAttribute('data-date-type');
+                    const status = item.getAttribute('data-status');
+
+                    let show = false;
+                    if (filterValue === 'all') {
+                        show = true;
+                    } else if (filterValue === 'today' && dateType === 'today') {
+                        show = true;
+                    } else if (filterValue === 'tomorrow' && dateType === 'tomorrow') {
+                        show = true;
+                    } else if (filterValue === 'active' && status === 'active') {
+                        show = true;
+                    } else if (filterValue === 'ended' && status === 'ended') {
+                        show = true;
+                    }
+
+                    if (show) {
+                        item.style.display = 'block';
+                        item.classList.add('chat-animate-in');
+                        visibleCount++;
+                    } else {
+                        item.style.display = 'none';
+                        item.classList.remove('chat-animate-in');
+                    }
+                });
+
+                // Show/hide empty state if no items match
+                const emptyState = document.getElementById('filterEmptyState');
+                if (visibleCount === 0) {
+                    if (!emptyState) {
+                        const noMatchHtml = `
+                            <div id="filterEmptyState" class="appointment-card filter-empty-state w-100">
+                                <div class="empty-state">
+                                    <i class="fas fa-search d-block"></i>
+                                    <h5 class="fw-bold text-muted">Tidak Ada Hasil</h5>
+                                    <p class="text-muted small mb-0">Tidak ada konsultasi yang sesuai dengan filter ini.</p>
+                                </div>
+                            </div>
+                        `;
+                        document.querySelector('.col-lg-8').insertAdjacentHTML('beforeend', noMatchHtml);
+                    } else {
+                        emptyState.style.display = 'block';
+                    }
+                } else if (emptyState) {
+                    emptyState.style.display = 'none';
+                }
+            });
+        });
+
     </script>
+
+    {{-- Toast feedback alerts --}}
+    @if(session('success'))
+        <script>
+            Swal.fire({
+                icon: 'success',
+                title: 'Berhasil!',
+                text: "{{ session('success') }}",
+                timer: 3000,
+                showConfirmButton: false
+            });
+        </script>
+    @endif
+    @if(session('error'))
+        <script>
+            Swal.fire({
+                icon: 'error',
+                title: 'Gagal!',
+                text: "{{ session('error') }}",
+                timer: 3000,
+                showConfirmButton: false
+            });
+        </script>
+    @endif
 </body>
 
 </html>

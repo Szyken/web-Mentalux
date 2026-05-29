@@ -86,6 +86,43 @@ class AdminController extends Controller
         return back()->with('success', 'Sertifikat ditolak dengan alasan: ' . $reason);
     }
 
+    // 4. Proses Cabut Verifikasi (Revoke)
+    public function revoke($id)
+    {
+        $this->authorizeAdmin();
+
+        DB::table('psychologist_certificates')
+            ->where('id', $id)
+            ->update([
+                'status' => 'rejected',
+                'reject_reason' => 'Verifikasi dicabut oleh Administrator.'
+            ]);
+
+        return back()->with('success', 'Verifikasi berhasil dicabut! Status sertifikat sekarang Ditolak.');
+    }
+
+    // 5. Hapus Data Verifikasi Permanen
+    public function deleteVerification($id)
+    {
+        $this->authorizeAdmin();
+
+        $cert = DB::table('psychologist_certificates')->where('id', $id)->first();
+        if ($cert) {
+            // Hapus file fisik dari public/uploads/certificates jika ada
+            $filePath = public_path('uploads/certificates/' . $cert->certificate_path);
+            if (\Illuminate\Support\Facades\File::exists($filePath)) {
+                \Illuminate\Support\Facades\File::delete($filePath);
+            }
+
+            // Hapus dari DB
+            DB::table('psychologist_certificates')->where('id', $id)->delete();
+
+            return back()->with('success', 'Data verifikasi sertifikat berhasil dihapus secara permanen!');
+        }
+
+        return back()->with('error', 'Gagal menghapus! Data verifikasi tidak ditemukan.');
+    }
+
     // --- FITUR KELOLA AKUN ---
 
     public function accounts(Request $request)
