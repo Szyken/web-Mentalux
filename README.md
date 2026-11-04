@@ -60,5 +60,5 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
 
 {{Cara Menjalankan Kode Web:}}
 1. Untuk menjalankan project utama, gunakan perintah berikut: "php artisan serve" lewat terminal dengan cara (ctrl + `)
-2. atau pada pojok kiri atas anda bisa klik "Terminal" yang ada di sebelah kanan "Run" dan memasukkan "php artisan serve"
+2. atau pada pojok kiri atas anda bisa klik "Terminal" yang ada di sebelah kanan "Run" dan memasukkan "php artisan serve".
 
