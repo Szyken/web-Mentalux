@@ -12,7 +12,7 @@ Repo ini berisi seluruh kode sumber aplikasi web **MentalUX** yang telah dimigra
 
 | Tentang Kami (Our Story) | Direktori & Pencarian Psikolog |
 | --- | --- |
-| <img width="1917" height="910" alt="Screenshot 2026-11-17 113355" src="https://github.com/user-attachments/assets/d676faa1-05ee-4b6c-b6b3-b20828f46332" /> | !<img width="1917" height="910" alt="Screenshot 2026-11-17 113408" src="https://github.com/user-attachments/assets/e306237d-208c-441f-a9af-f88976e6fa75" /> |
+| <img width="1917" height="910" alt="Screenshot 2026-11-17 113355" src="https://github.com/user-attachments/assets/d676faa1-05ee-4b6c-b6b3-b20828f46332" /> | <img width="1917" height="910" alt="Screenshot 2026-11-17 113408" src="https://github.com/user-attachments/assets/e306237d-208c-441f-a9af-f88976e6fa75" /> |
 
 | Pusat Edukasi (Knowledge Hub) | Artikel & Tips Kesehatan Mental |
 | --- | --- |
