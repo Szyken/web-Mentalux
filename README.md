@@ -1,4 +1,3 @@
-<img width="1917" height="907" alt="Screenshot 2026-11-17 113333" src="https://github.com/user-attachments/assets/d751778c-e8e8-4090-905a-e37041d37c3d" />
 # MentalUX
 
 Platform Konsultasi Psikologi dan Kesehatan Mental Berbasis Web, dibuat untuk proyek mata kuliah IS513-B E-Business Program Studi Sistem Informasi, Universitas Multimedia Nusantara.
@@ -9,35 +8,35 @@ Repo ini berisi seluruh kode sumber aplikasi web **MentalUX** yang telah dimigra
 
 ## Preview
 
-![Hero Section dan Paket Sesi Konsultasi MentalUX](docs/preview/01-home.png)
+<img width="1917" height="907" alt="Screenshot 2026-11-17 113333" src="https://github.com/user-attachments/assets/f2830c30-a5be-4b39-887e-80fe3070e9a5" />
 
 | Tentang Kami (Our Story) | Direktori & Pencarian Psikolog |
 | --- | --- |
-| ![Visi misi MentalUX dan metrik layanan](docs/preview/02-about.png) | ![Pencarian nama psikolog dan kartu profil spesialis](docs/preview/03-psychologist.png) |
+| <img width="1917" height="910" alt="Screenshot 2026-11-17 113355" src="https://github.com/user-attachments/assets/d676faa1-05ee-4b6c-b6b3-b20828f46332" /> | !<img width="1917" height="910" alt="Screenshot 2026-11-17 113408" src="https://github.com/user-attachments/assets/e306237d-208c-441f-a9af-f88976e6fa75" /> |
 
 | Pusat Edukasi (Knowledge Hub) | Artikel & Tips Kesehatan Mental |
 | --- | --- |
-| ![Video edukasi YouTube tersemat mengenai kesehatan mental](docs/preview/04-education-video.png) | ![Daftar artikel berdasarkan kategori Work Life, Mindfulness, dan Relationship](docs/preview/05-education-articles.png) |
+| <img width="1917" height="901" alt="Screenshot 2026-11-17 115813" src="https://github.com/user-attachments/assets/7260f12a-4248-4fee-949e-ade712218e32" /> | <img width="1917" height="911" alt="Screenshot 2026-11-17 113441" src="https://github.com/user-attachments/assets/5e150156-18ab-4da5-95fa-94ff5333d119" /> |
 
 | Halaman Login | Halaman Sign Up (Multi-Role) |
 | --- | --- |
-| ![Form login email dan password dengan Remember Me](docs/preview/06-login.png) | ![Form registrasi akun dengan pilihan role Customer/Psikolog](docs/preview/07-signup.png) |
+| <img width="1917" height="898" alt="Screenshot 2026-11-17 113449" src="https://github.com/user-attachments/assets/6078c7e2-c1c4-431b-b45e-64a1aa11b12b" /> | <img width="1917" height="896" alt="Screenshot 2026-11-17 113505" src="https://github.com/user-attachments/assets/da7ac491-0be4-4ee2-afac-4dc09bedcfce" /> |
 
 | Customer Dashboard | Pemilihan Jadwal & Slot Jam Konsultasi |
 | --- | --- |
-| ![Dashboard pelanggan menampilkan profil, sesi aktif, dan tombol Find Expert](docs/preview/08-customer-dashboard.png) | ![Pemilihan tanggal dan 4 slot jam konsultasi WIB](docs/preview/09-booking-schedule.png) |
+| <img width="1917" height="912" alt="Screenshot 2026-11-17 113846" src="https://github.com/user-attachments/assets/de007135-8c19-4506-b16f-0284a5cb073d" /> | <img width="1917" height="902" alt="Screenshot 2026-11-17 113904" src="https://github.com/user-attachments/assets/13d19054-8442-46b7-ba2a-893005adbf3f" /> |
 
 | Pembayaran QRIS & Transfer Bank | Ruang Chat Konsultasi Real-Time |
 | --- | --- |
-| ![Halaman checkout dengan Order ID, countdown timer, dan QRIS](docs/preview/10-payment-qris.png) | ![Ruang percakapan antara pasien dan psikolog beserta tombol End Session](docs/preview/11-chat-room.png) |
+| <img width="1917" height="912" alt="Screenshot 2026-11-17 113929" src="https://github.com/user-attachments/assets/01ee914b-0ee8-44b1-b5d6-8dc27f393794" /> | !<img width="1917" height="913" alt="Screenshot 2026-11-17 113940" src="https://github.com/user-attachments/assets/137e7d7c-b780-4693-b0d6-d37782e3168d" /> |
 
 | Psychologist Dashboard | Upload Sertifikat Praktik Psikolog |
 | --- | --- |
-| ![Dashboard psikolog menampilkan pendapatan bulanan dan antrean pasien](docs/preview/12-psychologist-dashboard.png) | ![Form unggah file sertifikat praktik berformat PDF maks 10 MB](docs/preview/13-upload-certificate.png) |
+| <img width="1917" height="917" alt="Screenshot 2026-11-17 120026" src="https://github.com/user-attachments/assets/2b17b36c-de81-44cf-b6f8-1e200b45d3ae" /> | <img width="1917" height="912" alt="Screenshot 2026-11-17 120053" src="https://github.com/user-attachments/assets/c7eaf604-7f66-40ed-84d8-3b37165d160b" /> |
 
 | Admin Dashboard | Verifikasi Sertifikat Psikolog (Admin) |
 | --- | --- |
-| ![Panel admin menampilkan total user, psikolog, sesi, dan menu manajemen](docs/preview/14-admin-dashboard.png) | ![Tabel persetujuan sertifikat PDF psikolog dengan aksi Approve/Reject](docs/preview/15-admin-verify.png) |
+| <img width="1917" height="913" alt="Screenshot 2026-11-17 120140" src="https://github.com/user-attachments/assets/b527d533-093c-46eb-99b2-7ee1d9de3962" /> | <img width="1917" height="906" alt="Screenshot 2026-11-17 120204" src="https://github.com/user-attachments/assets/da39cc25-c193-4d04-bbe9-b7a6e5e0b361" /> |
 
 ## Halaman & Route
 
@@ -194,12 +193,11 @@ Gaya visual **MentalUX** dirancang bersih dan menenangkan (*calming interface*) 
 | Dark Navy | `#1E2433` | Latar kartu pembayaran QRIS dan area *Footer* |
 | Status Badges | `#198754` (Hijau), `#FFC107` (Kuning), `#DC3545` (Merah) | Indikator status *Verified / Confirmed*, *Pending*, dan tombol *End Session* / *Reject* |
 
-## Tim pengembang (Kelompok 2 — IS513-B)
 
 | Nama | NIM | Peran Utama |
 | --- | --- | --- |
-| **Ferdy Nugraha Oey** | 00000122523 | Web Developer (Laravel Migration & Backend), UI/UX Design, System Requirements & Deployment |
-| **Ahmad Fikram Salman** | 00000117731 | System Architecture, Wireframing & Market Development Analysis |
-| **Hanif Afan Harits** | 00000117698 | System Implementation, Business Process & Financial Modeling |
-| **Carla Ophelia Tioho** | 00000122090 | SDLC Methodology, Business Flow Chart & Problem Identification |
-| **Michaela Eleonora** | 00000130277 | System Testing, Risk Assessment, Security Policy (WAF) & Competitor Analysis |
+| **Ferdy Nugraha Oey** | Web Developer (Laravel Migration & Backend), UI/UX Design, System Requirements & Deployment |
+| **Ahmad Fikram Salman** | System Architecture, Wireframing & Market Development Analysis |
+| **Hanif Afan Harits** | System Implementation, Business Process & Financial Modeling |
+| **Carla Ophelia Tioho** | SDLC Methodology, Business Flow Chart & Problem Identification |
+| **Michaela Eleonora** | System Testing, Risk Assessment, Security Policy (WAF) & Competitor Analysis |
