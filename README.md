@@ -1,3 +1,4 @@
+<img width="1917" height="907" alt="Screenshot 2026-11-17 113333" src="https://github.com/user-attachments/assets/d751778c-e8e8-4090-905a-e37041d37c3d" />
 # MentalUX
 
 Platform Konsultasi Psikologi dan Kesehatan Mental Berbasis Web, dibuat untuk proyek mata kuliah IS513-B E-Business Program Studi Sistem Informasi, Universitas Multimedia Nusantara.
