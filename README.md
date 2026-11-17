@@ -28,7 +28,7 @@ Repo ini berisi seluruh kode sumber aplikasi web **MentalUX** yang telah dimigra
 
 | Pembayaran QRIS & Transfer Bank | Ruang Chat Konsultasi Real-Time |
 | --- | --- |
-| <img width="1917" height="912" alt="Screenshot 2026-11-17 113929" src="https://github.com/user-attachments/assets/01ee914b-0ee8-44b1-b5d6-8dc27f393794" /> | !<img width="1917" height="913" alt="Screenshot 2026-11-17 113940" src="https://github.com/user-attachments/assets/137e7d7c-b780-4693-b0d6-d37782e3168d" /> |
+| <img width="1917" height="912" alt="Screenshot 2026-11-17 113929" src="https://github.com/user-attachments/assets/01ee914b-0ee8-44b1-b5d6-8dc27f393794" /> | <img width="1917" height="913" alt="Screenshot 2026-11-17 113940" src="https://github.com/user-attachments/assets/137e7d7c-b780-4693-b0d6-d37782e3168d" /> |
 
 | Psychologist Dashboard | Upload Sertifikat Praktik Psikolog |
 | --- | --- |
@@ -194,8 +194,8 @@ Gaya visual **MentalUX** dirancang bersih dan menenangkan (*calming interface*) 
 | Status Badges | `#198754` (Hijau), `#FFC107` (Kuning), `#DC3545` (Merah) | Indikator status *Verified / Confirmed*, *Pending*, dan tombol *End Session* / *Reject* |
 
 
-| Nama | NIM | Peran Utama |
-| --- | --- | --- |
+| Nama | Peran Utama |
+| --- | --- |
 | **Ferdy Nugraha Oey** | Web Developer (Laravel Migration & Backend), UI/UX Design, System Requirements & Deployment |
 | **Ahmad Fikram Salman** | System Architecture, Wireframing & Market Development Analysis |
 | **Hanif Afan Harits** | System Implementation, Business Process & Financial Modeling |
